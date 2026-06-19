@@ -1,0 +1,43 @@
+{
+  "name": "@cognis-digital/chainwatch",
+  "version": "0.1.0",
+  "description": "EVM event watcher with rule-based alerting. Declare watched contracts, event signatures, and alert rules; chainwatch processes blocks/logs and fires alerts when rules match.",
+  "type": "module",
+  "bin": {
+    "chainwatch": "dist/src/cli.js"
+  },
+  "exports": {
+    ".": "./dist/src/index.js"
+  },
+  "files": [
+    "dist/src",
+    "examples",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-fixtures.mjs",
+    "pretest": "npm run build",
+    "test": "node --test \"dist/test/**/*.test.js\"",
+    "clean": "node -e \"import('node:fs').then(fs=>fs.rmSync('dist',{recursive:true,force:true}))\""
+  },
+  "keywords": [
+    "evm",
+    "ethereum",
+    "arbitrum",
+    "event",
+    "watcher",
+    "monitoring",
+    "alerting",
+    "osint",
+    "cli"
+  ],
+  "author": "Cognis Digital",
+  "license": "SEE LICENSE IN COCL 1.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}

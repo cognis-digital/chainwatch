@@ -1,0 +1,62 @@
+{
+  "name": "example-watcher",
+  "chain": "ethereum",
+  "contracts": [
+    {
+      "name": "USDC",
+      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "events": [
+        "Transfer(address,address,uint256)",
+        "Approval(address,address,uint256)"
+      ]
+    },
+    {
+      "name": "WETH",
+      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "events": [
+        "Transfer(address,address,uint256)",
+        "Deposit(address,uint256)"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "large-usdc-transfer",
+      "description": "USDC transfer over 1,000,000 USDC (6-decimal units)",
+      "severity": "warn",
+      "contracts": ["USDC"],
+      "events": ["Transfer"],
+      "when": [{ "field": "value", "op": "gt", "value": "1000000000000" }]
+    },
+    {
+      "id": "flagged-sender",
+      "description": "Any transfer originating from a flagged address",
+      "severity": "critical",
+      "events": ["Transfer"],
+      "when": [
+        {
+          "field": "from",
+          "op": "from-address",
+          "value": "0x1111111111111111111111111111111111111111"
+        }
+      ]
+    },
+    {
+      "id": "weth-deposit-watch",
+      "description": "WETH deposit greater than 50 ETH (wei)",
+      "severity": "info",
+      "contracts": ["WETH"],
+      "events": ["Deposit"],
+      "when": [
+        { "field": "value", "op": "gt", "value": "50000000000000000000" }
+      ]
+    },
+    {
+      "id": "approval-to-router",
+      "description": "Approval whose spender contains a known router prefix",
+      "severity": "info",
+      "events": ["Approval"],
+      "when": [{ "field": "spender", "op": "contains", "value": "0x7a25" }]
+    }
+  ]
+}

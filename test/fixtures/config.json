@@ -1,0 +1,34 @@
+{
+  "name": "test-watcher",
+  "chain": "ethereum",
+  "contracts": [
+    {
+      "name": "TKN",
+      "address": "0xAAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa",
+      "events": ["Transfer(address,address,uint256)", "Approval(address,address,uint256)"]
+    }
+  ],
+  "rules": [
+    {
+      "id": "big-transfer",
+      "description": "transfer value over 1000",
+      "severity": "warn",
+      "contracts": ["TKN"],
+      "events": ["Transfer"],
+      "when": [{ "field": "value", "op": "gt", "value": "1000" }]
+    },
+    {
+      "id": "from-flagged",
+      "description": "from a flagged address",
+      "severity": "critical",
+      "when": [
+        { "field": "from", "op": "from-address", "value": "0x1111111111111111111111111111111111111111" }
+      ]
+    },
+    {
+      "id": "exact-event",
+      "severity": "info",
+      "when": [{ "field": "event", "op": "eq", "value": "Approval" }]
+    }
+  ]
+}

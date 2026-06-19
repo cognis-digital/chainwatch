@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Env / secrets (live RPC endpoints etc. — never commit)
+.env
+.env.*
+
+# Scaffolded local files
+chainwatch.config.json
+chainwatch.logs.json

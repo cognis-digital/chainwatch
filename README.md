@@ -19,6 +19,33 @@ actions — chainwatch reads and evaluates, it never sends.
 
 ---
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+  "chains": [
+    {
+      "id": "0x1234567890123456",
+      "name": "Bitcoin",
+      "block_height": 123456,
+      "timestamp": "2022-07-12T14:30:00Z"
+    },
+    {
+      "id": "0x2345678901234567",
+      "name": "Ethereum",
+      "block_height": 987654,
+      "timestamp": "2022-06-15T10:45:00Z"
+    }
+  ]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Install / build
 
 ```bash
